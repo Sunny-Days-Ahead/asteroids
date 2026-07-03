@@ -3,6 +3,7 @@ extends Node2D
 var player_score
 var big_asteroid = preload("res://actors/big_asteroid/big_asteroid.tscn")
 var small_asteroid = preload("res://actors/small_asteroid/small_asteroid.tscn")
+var explosion = preload("res:///explosion.tscn")
 
 @export var asteroid_container : Node
 
@@ -20,6 +21,10 @@ func _process(delta: float) -> void:
 	if player_health == 0 : 
 		var length = get_viewport().size.y
 		var width = get_viewport().size.x
+		var explosion_instance = explosion.instantiate()
+		asteroid_container.add_child(explosion_instance)
+		explosion_instance.global_position = $PlayerShip.global_position
+		await get_tree().process_frame
 		player_lives -= 1 
 		$HUD/Control/MarginContainer/PlayerLives.text = "Lives: " + str(player_lives)
 		player_health = 3
@@ -31,6 +36,9 @@ func _process(delta: float) -> void:
 
 func _on_score_100(hit_asteroid) -> void:
 	player_score += 100
+	var explosion_instance = explosion.instantiate()
+	asteroid_container.add_child(explosion_instance)
+	explosion_instance.global_position = hit_asteroid.global_position
 	$HUD/Control/MarginContainer2/PlayerScore.text = "Score: " + str(player_score)
 	spawn_small_asteroid(hit_asteroid.global_position.x, hit_asteroid.global_position.y + 50)
 	spawn_small_asteroid(hit_asteroid.global_position.x + 50, hit_asteroid.global_position.y)
@@ -39,9 +47,12 @@ func _on_score_100(hit_asteroid) -> void:
 	
 func _on_score_50(hit_asteroid) -> void:
 	player_score += 50
+	var explosion_instance = explosion.instantiate()
+	asteroid_container.add_child(explosion_instance)
+	explosion_instance.global_position = hit_asteroid.global_position
 	$HUD/Control/MarginContainer2/PlayerScore.text = "Score: " + str(player_score)
 	hit_asteroid.queue_free()
-	
+		
 func _on_asteroid_timer_timeout() -> void:
 	spawn_asteroid(2)
 
@@ -60,5 +71,5 @@ func spawn_small_asteroid(x, y):
 	await get_tree().process_frame
 	asteroid_container.add_child(small_asteroid_instance)
 	small_asteroid_instance.score_50.connect(_on_score_50)
-	small_asteroid_instance.global_position.x = x
+	small_asteroid_instance.global_position.x = x 
 	small_asteroid_instance.global_position.y = y

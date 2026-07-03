@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bsoxke8p2ao05"]
 
 [ext_resource type="Script" uid="uid://bvoyojdcwdly7" path="res://actors/laser/laser.gd" id="1_gj7jk"]
+[ext_resource type="Script" uid="uid://d1k0dmxcl64je" path="res://actors/laser/cpu_particles_2d.gd" id="2_wxu1n"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4v7s"]
 radius = 2.0
@@ -17,4 +18,23 @@ polygon = PackedVector2Array(0, -2, 2, 0, 0, 2, -2, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=878724709]
 shape = SubResource("CapsuleShape2D_g4v7s")
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=458754949]
+amount = 30
+emission_shape = 4
+emission_points = PackedVector2Array(0, 0, 0, 0)
+emission_colors = PackedColorArray()
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 14.85
+initial_velocity_max = 14.85
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+script = ExtResource("2_wxu1n")
+
+[node name="ExpiryCountdown" type="Timer" parent="CPUParticles2D" unique_id=919230630]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="CPUParticles2D/ExpiryCountdown" to="CPUParticles2D" method="_on_expiry_countdown_timeout"]

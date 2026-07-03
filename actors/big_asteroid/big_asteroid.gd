@@ -6,6 +6,7 @@ var angle : float
 var heading : Vector2
 var screen_size : Vector2
 
+@onready var explosion = $Explosion
 @export var small_asteroid : PackedScene
 
 signal score_100
@@ -22,7 +23,7 @@ func _ready() -> void:
 	global_position = Vector2 (randx, randy)
 	
 	speed = randi_range(-100, 100)
-	rotation_speed = randi_range(-10,10)
+	rotation_speed = randi_range(-3,3)
 	screen_size = get_viewport_rect().size 
 	angle = randi_range(0, 360)
 	heading = Vector2.from_angle(deg_to_rad(angle))
@@ -40,14 +41,13 @@ func _process(delta: float) -> void:
 		position.x = 2020
 	if position.y < -100:
 		position.y = 1180
-	#position.x = wrapf(position.x, 0, screen_size.x)
-	#position.y = wrapf(position.y, 0, screen_size.y)
-	move_and_collide(heading)
 
 
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	score_100.emit(self) ##Return the name of the node with the signal
 
+	#Trigger the one-shot emission so they naturally decay
+	
 
 func _on_score_50():
 	score_50.emit()

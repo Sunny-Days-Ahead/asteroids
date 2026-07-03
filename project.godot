@@ -21,6 +21,10 @@ window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor]
+
+movie_writer/movie_file="/Users/sunny/Desktop/asteroids/movie.mp4"
+
 [input]
 
 left={
@@ -66,3 +70,4 @@ shoot={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+viewport/hdr_2d=true

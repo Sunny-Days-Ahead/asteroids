@@ -18,7 +18,7 @@ func _ready() -> void:
 	global_position = Vector2 (randx, randy)
 
 	speed = randi_range(-100, 100)
-	rotation_speed = randi_range(-10,10)
+	rotation_speed = randi_range(-3,3)
 	screen_size = get_viewport_rect().size 
 	angle = randi_range(0, 360)
 	heading = Vector2.from_angle(deg_to_rad(angle))

@@ -17,7 +17,6 @@ laser = ExtResource("2_gbmm3")
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1106505721]
 position = Vector2(-0.52668023, 2.511403e-07)
 scale = Vector2(0.57891786, 0.56553453)
-color = Color(0.46423507, 0.46423507, 0.46423507, 1)
 polygon = PackedVector2Array(6.583491, 2.5114028e-07, -2.1067183, -6.188482, 1.5920889, 0, -2.0469723, 6.28624)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1102551295]

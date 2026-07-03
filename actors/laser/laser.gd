@@ -5,6 +5,9 @@ var speed = 600
 var velocity = 0.0
 var ship_velocity : Vector2 = Vector2.ZERO
 
+
+@onready var particles = $CPUParticles2D
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Velocity is in the "forward" direction -- bullet is facing right in the scene view, so take the right direction and rotate it the same as the node's rotation
@@ -28,7 +31,18 @@ func _physics_process(delta: float) -> void:
 	if position.y < -100:
 		position.y = 1180
 	await get_tree().create_timer(1.2).timeout
+	#Take particles out of the current node tree
+	$CPUParticles2D/ExpiryCountdown.start()
+	remove_child(particles)
+	get_tree().get_root().add_child(particles)
+	#Trigger the one-shot emission so they naturally decay
+	particles.emitting = true
 	queue_free()
-
 func _on_area_entered(area: Area2D) -> void:
+	$CPUParticles2D/ExpiryCountdown.start()
+	remove_child(particles)
+	get_tree().get_root().add_child(particles)
+	#Trigger the one-shot emission so they naturally decay
+	particles.emitting = true
 	queue_free()
+	
