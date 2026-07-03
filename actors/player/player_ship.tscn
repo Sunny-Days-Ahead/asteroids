@@ -10,7 +10,7 @@ size = Vector2(5.661806, 7.636855)
 position = Vector2(7.6293945e-06, -1.9073486e-06)
 scale = Vector2(7.5947533, 7.5947533)
 collision_layer = 4
-collision_mask = 9
+collision_mask = 137
 script = ExtResource("1_q2qul")
 laser = ExtResource("2_gbmm3")
 
@@ -29,6 +29,7 @@ position = Vector2(6.056812, 2.511403e-07)
 [node name="BulletContainer" type="Node" parent="." unique_id=831178459]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1297381854]
+collision_mask = 129
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1019311804]
 position = Vector2(0.72418255, 1.9620333e-07)

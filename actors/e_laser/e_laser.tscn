@@ -10,7 +10,7 @@ height = 4.0
 [node name="ELaser" type="Area2D" unique_id=1686268405]
 scale = Vector2(3.0800004, 3.0800004)
 collision_layer = 128
-collision_mask = 9
+collision_mask = 13
 script = ExtResource("1_g3o5m")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1589331575]

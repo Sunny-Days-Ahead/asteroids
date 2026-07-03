@@ -11,6 +11,7 @@ extends CharacterBody2D
 const ACCELERATION : float = 100.0
 
 signal player_hit
+signal player_shot
 
 var screen_size : Vector2
 var rotation_direction = 0
@@ -57,4 +58,8 @@ func _process(delta: float) -> void:
 
 @warning_ignore("unused_parameter")
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	player_hit.emit()
+	print(area.collision_layer)
+	if area.get_collision_layer_value(1):
+		player_hit.emit()
+	else:
+		player_shot.emit()

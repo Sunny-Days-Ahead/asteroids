@@ -4,6 +4,7 @@ var player_score
 var big_asteroid = preload("res://actors/big_asteroid/big_asteroid.tscn")
 var small_asteroid = preload("res://actors/small_asteroid/small_asteroid.tscn")
 var explosion = preload("res:///actors/explosion/explosion.tscn")
+var ufo = preload("res://actors/ufo/ufo.tscn")
 
 @export var asteroid_container : Node
 
@@ -13,13 +14,14 @@ var explosion = preload("res:///actors/explosion/explosion.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player_score = 0
-	spawn_asteroid(8)
-
-
+	spawn_asteroid(4)
+	spawn_ufo()
+	spawn_no_of_small_asteroids(8)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
-	if player_health == 0 : 
+	if player_health <= 0 : 
 		var length = get_viewport().size.y
 		var width = get_viewport().size.x
 		var explosion_instance = explosion.instantiate()
@@ -34,7 +36,14 @@ func _process(delta: float) -> void:
 	if player_lives == 0: 
 		get_tree().quit()
 
-
+func _on_score_500(hit_ufo):
+	player_score += 500
+	var explosioin_instance = explosion.instantiate()
+	asteroid_container.add_child(explosioin_instance)
+	explosioin_instance.global_position = hit_ufo.global_position
+	$HUD/Control/MarginContainer2/PlayerScore.text = "Score: " + str(player_score)
+	hit_ufo.queue_free()
+	
 func _on_score_100(hit_asteroid) -> void:
 	player_score += 100
 	var explosion_instance = explosion.instantiate()
@@ -78,6 +87,9 @@ func _on_player_ship_player_hit() -> void:
 	player_health -= 1 
 	$HUD/Control/MarginContainer3/PlayerHealth.text = "Health: " + str(player_health)
 	
+func _on_player_ship_player_shot() -> void:
+	player_health -= 3
+	
 func spawn_asteroid(count: int):
 	for value in count:
 		var big_asteroid_instance = big_asteroid.instantiate()
@@ -93,3 +105,12 @@ func spawn_small_asteroid(x, y):
 	small_asteroid_instance.score_0B.connect(_on_score_0B)
 	small_asteroid_instance.global_position.x = x 
 	small_asteroid_instance.global_position.y = y
+
+func spawn_no_of_small_asteroids(count: int):
+	for value in count:
+		spawn_small_asteroid(randi_range(0,1920),randi_range(0,1080))
+
+func spawn_ufo():
+	var ufo_instance = ufo.instantiate()
+	asteroid_container.add_child(ufo_instance)
+	ufo_instance.score_500.connect(_on_score_500)

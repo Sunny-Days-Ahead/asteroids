@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://cwive73pkfkja" path="res://actors/player/player_ship.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bgwwbms7eommy" path="res://main.gd" id="1_lquwl"]
-[ext_resource type="PackedScene" uid="uid://ig108kewbyrl" path="res://actors/ufo/ufo.tscn" id="3_h2yge"]
 
 [sub_resource type="Environment" id="Environment_yf21c"]
 background_mode = 3
@@ -92,8 +91,6 @@ position = Vector2(956.9999, 530)
 wait_time = 15.0
 autostart = true
 
-[node name="ufo" parent="." unique_id=717275498 instance=ExtResource("3_h2yge")]
-position = Vector2(702, 615)
-
 [connection signal="player_hit" from="PlayerShip" to="." method="_on_player_ship_player_hit"]
+[connection signal="player_shot" from="PlayerShip" to="." method="_on_player_ship_player_shot"]
 [connection signal="timeout" from="AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]

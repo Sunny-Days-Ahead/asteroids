@@ -4,6 +4,8 @@ const SPEED = 150
 
 var laser = preload("res://actors/e_laser/e_laser.tscn")
 
+signal score_500
+
 func _ready() -> void:
 	global_position.y = randi_range(0,1080)
 	global_position.x = randi_range(2220, 2420)
@@ -27,3 +29,9 @@ func shoot():
 
 func _on_timer_timeout() -> void:
 	shoot()
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	score_500.emit(self)
+	await get_tree().create_timer(1).timeout
+	queue_free()
