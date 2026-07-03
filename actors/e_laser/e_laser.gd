@@ -34,16 +34,12 @@ func _physics_process(delta: float) -> void:
 	#Time before laser expires
 	await get_tree().create_timer(1.2).timeout
 	#Take particles out of the current node tree
-	await get_tree().process_frame
-	#start the countdown
 	$CPUParticles2D/ExpiryCountdown.start()
-	#unparent them from this tree and move them to a different tree
 	remove_child(particles)
 	get_tree().get_root().add_child(particles)
-	#start the particles
 	particles.emitting = true
 	queue_free()
-@warning_ignore("unused_parameter")
+	
 func _on_area_entered(area: Area2D) -> void:
 	#Wait a tick
 	await get_tree().process_frame

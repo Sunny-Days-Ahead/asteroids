@@ -19,4 +19,7 @@ polygon = PackedVector2Array(-39, -24, 40, -24, 72, 0, 40, 24, -40, 24, -71, 0)
 [node name="Timer" type="Timer" parent="." unique_id=1699182436]
 autostart = true
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1014170555]
+rect = Rect2(-73, -25, 147, 50)
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

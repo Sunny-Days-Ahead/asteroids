@@ -10,6 +10,7 @@ var screen_size : Vector2
 
 signal score_100
 signal score_50
+signal score_0A
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -44,10 +45,19 @@ func _process(delta: float) -> void:
 
 @warning_ignore("unused_parameter")
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	score_100.emit(self) ##Return the name of the node with the signal
-
+	if area.collision_layer == 2:
+		score_100.emit(self) ##Return the name of the node with the signal
+	if collision_layer == 8:
+		score_0A.emit(self)
 	#Trigger the one-shot emission so they naturally decay
-	
 
 func _on_score_50():
 	score_50.emit()
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	var is_e_bullet = area.get_collision_layer_value(8)
+	if is_e_bullet:
+		score_0A.emit(self)
+	else:
+		score_100.emit(self)

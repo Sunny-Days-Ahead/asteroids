@@ -2,11 +2,11 @@ extends CharacterBody2D
 
 const SPEED = 150
 
-var laser = preload("res://actors/laser/laser.tscn")
+var laser = preload("res://actors/e_laser/e_laser.tscn")
 
 func _ready() -> void:
 	global_position.y = randi_range(0,1080)
-	global_position.x = randi_range(2020, 2220)
+	global_position.x = randi_range(2220, 2420)
 	
 	
 func _process(delta: float) -> void:
@@ -16,12 +16,14 @@ func _process(delta: float) -> void:
 		_ready()
 #it is friday in california 
 func shoot():
-	var new_laser = laser.instantiate()
-	new_laser.global_rotation = randf_range(0, TAU)
-	new_laser.velocity = SPEED
-	new_laser.global_position = $ELaserSpawn.global_position
-	$ELaserContainer.add_child(new_laser)
-
+	if $VisibleOnScreenNotifier2D.is_on_screen() == true:
+		var new_laser = laser.instantiate()
+		new_laser.global_rotation = randf_range(0, TAU)
+		new_laser.velocity = SPEED
+		new_laser.global_position = $ELaserSpawn.global_position
+		$ELaserContainer.add_child(new_laser)
+	else:
+		pass 
 
 func _on_timer_timeout() -> void:
 	shoot()

@@ -7,6 +7,7 @@ var heading : Vector2
 var screen_size : Vector2
 
 signal score_50
+signal score_0B
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var rng : RandomNumberGenerator = RandomNumberGenerator.new()
@@ -41,5 +42,14 @@ func _process(delta: float) -> void:
 	
 @warning_ignore("unused_parameter")
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	score_50.emit(self) ##Return the name of the node with the signal
+	print(area.collision_layer)
+	var is_not_e_bullet = area.get_collision_layer_value(2)
+	if is_not_e_bullet:
+		score_50.emit(self)
+	else:
+		score_0B.emit(self)
+
+	
+	
+
 	
