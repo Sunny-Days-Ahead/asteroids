@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://di4qwc2bdshaw"]
+
+[ext_resource type="Script" uid="uid://cflrad77f8ab8" path="res://big_asteroid.gd" id="1_g6hak"]
+[ext_resource type="PackedScene" uid="uid://dpyccb5hlri6e" path="res://small_asteroid.tscn" id="2_77n77"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
+radius = 17.029387
+
+[node name="BigAsteroid" type="CharacterBody2D" unique_id=1872490962]
+scale = Vector2(2.560001, 2.560001)
+motion_mode = 1
+script = ExtResource("1_g6hak")
+small_asteroid = ExtResource("2_77n77")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=415665972]
+position = Vector2(-9, 5)
+polygon = PackedVector2Array(16, 13, 3, 13, -8, 9, -11, -5, -5, -19, 9, -25, 23.843746, -19.843746, 27, -5, 22, 7)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1987913988]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Area2D" unique_id=1614072310]
+polygon = PackedVector2Array(0, -20, 14.843745, -14.843745, 18, 0, 13, 12, 7, 18, -6, 18, -17, 14, -20, 0, -14, -14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=344633587]
+shape = SubResource("CircleShape2D_yf5fn")
+
+[connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]

@@ -1,0 +1,37 @@
+extends Area2D
+
+var screen_size : Vector2
+var speed = 400
+var velocity = 0.0
+var ship_velocity : Vector2 = Vector2.ZERO
+
+signal laser_hit
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	# Velocity is in the "forward" direction -- bullet is facing right in the scene view, so take the right direction and rotate it the same as the node's rotation
+	velocity = Vector2.RIGHT.rotated(self.global_rotation) * speed
+	
+	# Add the ship's velocity also, so the bullets always go faster than the ship. clip the incoming velocity x and y so they can't be negative
+	velocity += ship_velocity.maxf(0.0)    #maxf(0.0) picks whichever is larger between 0.0 and x/y
+
+	screen_size = get_viewport_rect().size
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta: float) -> void:
+	# Every frame, adjust the position based on velocity and delta
+	position += velocity * delta
+	
+	position.x = wrapf(position.x, 0, screen_size.x)
+	position.y = wrapf(position.y, 0, screen_size.y)
+
+	await get_tree().create_timer(.85).timeout
+	queue_free()
+
+
+
+func _on_body_entered(body: Node2D) -> void:
+	laser_hit.emit(self)
+	print("test")
+
+func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	queue_free()

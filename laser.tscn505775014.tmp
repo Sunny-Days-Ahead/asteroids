@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bsoxke8p2ao05"]
+
+[ext_resource type="Script" uid="uid://bvoyojdcwdly7" path="res://laser.gd" id="1_fn5yt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
+size = Vector2(8.5, 0.5)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_g4v7s"]
+
+[node name="Laser" type="CharacterBody2D" unique_id=431597359]
+collision_layer = 0
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_fn5yt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=878724709]
+position = Vector2(3.75, -0.25)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=475579006]
+offset_right = 34.0
+offset_bottom = 5.0
+scale = Vector2(0.21709776, -0.08042688)
+texture = SubResource("PlaceholderTexture2D_g4v7s")
+metadata/_edit_use_anchors_ = true

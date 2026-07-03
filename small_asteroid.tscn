@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dpyccb5hlri6e"]
+
+[ext_resource type="Script" uid="uid://cmj1nbs622yh" path="res://small_asteroid.gd" id="1_ndwlm"]
+[ext_resource type="Shape2D" uid="uid://cqwliw3hox3ks" path="res://hurtbox.tres" id="2_kliy4"]
+
+[node name="SmallAsteroid" type="CharacterBody2D" unique_id=320025244]
+scale = Vector2(2.3901086, 2.3901086)
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_ndwlm")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=903054797]
+position = Vector2(-8, 5)
+polygon = PackedVector2Array(17, 0, 0, 0, 9, -14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=163638417]
+shape = ExtResource("2_kliy4")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1930291054]
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=1822479095]
+shape = ExtResource("2_kliy4")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]

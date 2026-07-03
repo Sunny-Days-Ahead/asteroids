@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://btl0otxtx6dxq"]
+
+[ext_resource type="PackedScene" uid="uid://cwive73pkfkja" path="res://player_ship.tscn" id="1_ig7tw"]
+
+[node name="Node2D" type="Node2D" unique_id=941547634]
+
+[node name="PlayerShip" parent="." unique_id=802837724 instance=ExtResource("1_ig7tw")]
+
+[node name="BulletContainer" type="Node2D" parent="." unique_id=221110689]
