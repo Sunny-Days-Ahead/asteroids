@@ -32,13 +32,20 @@ func _process(delta: float) -> void:
 	
 	rotation += rotation_speed * delta 
 	position += heading * speed * delta
-	position.x = wrapf(position.x, 0, screen_size.x)
-	position.y = wrapf(position.y, 0, screen_size.y)
-	move_and_slide()
+	if position.x > 2020:
+		position.x = -100
+	if position.y > 1180:
+		position.y = -100
+	if position.x < -100:
+		position.x = 2020
+	if position.y < -100:
+		position.y = 1180
+	#position.x = wrapf(position.x, 0, screen_size.x)
+	#position.y = wrapf(position.y, 0, screen_size.y)
+	move_and_collide(heading)
 
 
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	hide()
 	score_100.emit(self) ##Return the name of the node with the signal
 
 

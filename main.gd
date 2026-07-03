@@ -57,6 +57,7 @@ func spawn_asteroid(count: int):
 
 func spawn_small_asteroid(x, y):
 	var small_asteroid_instance = small_asteroid.instantiate()
+	await get_tree().process_frame
 	asteroid_container.add_child(small_asteroid_instance)
 	small_asteroid_instance.score_50.connect(_on_score_50)
 	small_asteroid_instance.global_position.x = x

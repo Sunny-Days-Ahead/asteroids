@@ -19,10 +19,14 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Every frame, adjust the position based on velocity and delta
 	position += velocity * delta
-	
-	position.x = wrapf(position.x, 0, screen_size.x)
-	position.y = wrapf(position.y, 0, screen_size.y)
-
+	if position.x > 2020:
+		position.x = -100
+	if position.y > 1180:
+		position.y = -100
+	if position.x < -100:
+		position.x = 2020
+	if position.y < -100:
+		position.y = 1180
 	await get_tree().create_timer(1.2).timeout
 	queue_free()
 

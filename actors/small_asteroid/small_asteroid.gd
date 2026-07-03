@@ -11,10 +11,10 @@ signal score_50
 func _ready() -> void:
 	var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 	
-	var length = get_viewport().size.y
+	var length = get_viewport().size.y 
 	var width = get_viewport().size.x
-	var randx = rng.randi_range(0, width)
-	var randy = rng.randi_range(0, length)
+	var randx = rng.randi_range(-100, width+100)
+	var randy = rng.randi_range(-100, length+100) 
 	global_position = Vector2 (randx, randy)
 
 	speed = randi_range(-100, 100)
@@ -28,9 +28,15 @@ func _process(delta: float) -> void:
 	
 	rotation += rotation_speed * delta 
 	position += heading * speed * delta
-	position.x = wrapf(position.x, 0, screen_size.x)
-	position.y = wrapf(position.y, 0, screen_size.y)
-	move_and_slide()
+	if position.x > 2020:
+		position.x = -100
+	if position.y > 1180:
+		position.y = -100
+	if position.x < -100:
+		position.x = 2020
+	if position.y < -100:
+		position.y = 1180
+	move_and_collide(heading)
 	
 	
 @warning_ignore("unused_parameter")
