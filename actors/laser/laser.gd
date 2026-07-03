@@ -1,7 +1,7 @@
 extends Area2D
 
 var screen_size : Vector2
-var speed = 400
+var speed = 600
 var velocity = 0.0
 var ship_velocity : Vector2 = Vector2.ZERO
 
@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	position.x = wrapf(position.x, 0, screen_size.x)
 	position.y = wrapf(position.y, 0, screen_size.y)
 
-	await get_tree().create_timer(.85).timeout
+	await get_tree().create_timer(1.2).timeout
 	queue_free()
 
 func _on_area_entered(area: Area2D) -> void:

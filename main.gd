@@ -6,15 +6,14 @@ var small_asteroid = preload("res://actors/small_asteroid/small_asteroid.tscn")
 
 @export var asteroid_container : Node
 
+@export_category("Player Vars")
 @export var player_health : int = 3
 @export var player_lives : int = 3
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player_score = 0
-	
-	spawn_asteroid()
-	spawn_asteroid()
-	spawn_asteroid()
+	spawn_asteroid(8)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -25,8 +24,7 @@ func _process(delta: float) -> void:
 		$HUD/Control/MarginContainer/PlayerLives.text = "Lives: " + str(player_lives)
 		player_health = 3
 		$HUD/Control/MarginContainer3/PlayerHealth.text = "Health: " + str(player_health)
-		global_position = Vector2(width/2, length/2)
-		print("minus one life")
+		$PlayerShip.global_position = Vector2(width/2, length/2)
 	if player_lives == 0: 
 		get_tree().quit()
 
@@ -44,13 +42,18 @@ func _on_score_50(hit_asteroid) -> void:
 	$HUD/Control/MarginContainer2/PlayerScore.text = "Score: " + str(player_score)
 	hit_asteroid.queue_free()
 	
-func _on_timer_timeout() -> void:
-	spawn_asteroid()
+func _on_asteroid_timer_timeout() -> void:
+	spawn_asteroid(2)
+
+func _on_player_ship_player_hit() -> void:
+	player_health -= 1 
+	$HUD/Control/MarginContainer3/PlayerHealth.text = "Health: " + str(player_health)
 	
-func spawn_asteroid():
-	var big_asteroid_instance = big_asteroid.instantiate()
-	asteroid_container.add_child(big_asteroid_instance)
-	big_asteroid_instance.score_100.connect(_on_score_100)
+func spawn_asteroid(count: int):
+	for value in count:
+		var big_asteroid_instance = big_asteroid.instantiate()
+		asteroid_container.add_child(big_asteroid_instance)
+		big_asteroid_instance.score_100.connect(_on_score_100)
 
 func spawn_small_asteroid(x, y):
 	var small_asteroid_instance = small_asteroid.instantiate()
@@ -58,8 +61,3 @@ func spawn_small_asteroid(x, y):
 	small_asteroid_instance.score_50.connect(_on_score_50)
 	small_asteroid_instance.global_position.x = x
 	small_asteroid_instance.global_position.y = y
-
-
-func _on_player_ship_player_hit() -> void:
-	player_health -= 1 
-	$HUD/Control/MarginContainer3/PlayerHealth.text = "Health: " + str(player_health)

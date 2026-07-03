@@ -2,11 +2,13 @@ extends CharacterBody2D
 
 @export_category("Variables")
 @export var speed = 1
-@export var max_speed = 30
-@export var rotation_speed = 1.5
+@export var max_speed = 300
+@export var rotation_speed = 3
 
 @export_category("Sub Nodes")
 @export var laser : PackedScene
+
+const ACCELERATION : float = 100.0
 
 signal player_hit
 
@@ -15,11 +17,21 @@ var rotation_direction = 0
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
+	velocity = Vector2.ZERO
 	
 func get_input():
+	var direction : Vector2 = Vector2.RIGHT.rotated(rotation)
 	rotation_direction = Input.get_axis("left", "right")
-	velocity += transform.x * Input.get_axis("down", "up") * move_toward(speed, max_speed, .5) 
-	
+	##thrust when up is pressed
+	if Input.is_action_pressed("up"):
+		velocity += direction * ACCELERATION
+		if velocity.length() > max_speed:
+			velocity = velocity.normalized() * max_speed
+	##slow down and approach zero when down is pressed
+	if Input.is_action_pressed("down"):
+		velocity.x = move_toward(velocity.x, 0, 10)
+		velocity.y = move_toward(velocity.y, 0, 10)
+	##it is friday in california
 	if Input.is_action_just_pressed("shoot"):
 		var new_laser := laser.instantiate()
 		new_laser.global_rotation = self.rotation
@@ -35,9 +47,11 @@ func _physics_process(delta):
 	rotation += rotation_direction * rotation_speed * delta
 	move_and_slide()
 
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	position.x = wrapf(position.x, 0, screen_size.x)
 	position.y = wrapf(position.y, 0, screen_size.y)
 
+@warning_ignore("unused_parameter")
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	player_hit.emit()
