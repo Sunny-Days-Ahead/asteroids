@@ -42,6 +42,7 @@ func _process(delta: float) -> void:
 		position.y = 1180
 
 
+@warning_ignore("unused_parameter")
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	score_100.emit(self) ##Return the name of the node with the signal
 
