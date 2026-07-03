@@ -4,12 +4,11 @@ extends CharacterBody2D
 @export var speed = 1
 @export var max_speed = 30
 @export var rotation_speed = 1.5
-@export var player_health : int = 3
-@export var player_lives : int = 3
+
 @export_category("Sub Nodes")
 @export var laser : PackedScene
 
-
+signal player_hit
 
 var screen_size : Vector2
 var rotation_direction = 0
@@ -39,16 +38,6 @@ func _physics_process(delta):
 func _process(delta: float) -> void:
 	position.x = wrapf(position.x, 0, screen_size.x)
 	position.y = wrapf(position.y, 0, screen_size.y)
-	if player_health == 0 : 
-		var length = get_viewport().size.y
-		var width = get_viewport().size.x
-		player_lives -= 1 
-		player_health = 3
-		global_position = Vector2(width/2, length/2)
-		print("minus one life")
-	if player_lives == 0: 
-		get_tree().quit()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	player_health -= 1
-	print(player_health)
+	player_hit.emit()

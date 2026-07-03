@@ -7,6 +7,79 @@
 script = ExtResource("1_lquwl")
 asteroid_container = NodePath("AsteroidContainer")
 
+[node name="HUD" type="Node" parent="." unique_id=65225613]
+
+[node name="Control" type="Control" parent="HUD" unique_id=1521026973]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/Control" unique_id=262235458]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -58.0
+offset_right = -1.0
+offset_bottom = 23.0
+grow_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(-100, 50)
+offset_transform_scale = Vector2(2.88, 2.88)
+
+[node name="PlayerLives" type="Label" parent="HUD/Control/MarginContainer" unique_id=1904675976]
+layout_mode = 2
+text = "Lives: 3"
+
+[node name="MarginContainer2" type="MarginContainer" parent="HUD/Control" unique_id=1709155821]
+layout_mode = 1
+offset_right = 61.0
+offset_bottom = 23.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(100, 50)
+offset_transform_scale = Vector2(2.88, 2.88)
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayerScore" type="Label" parent="HUD/Control/MarginContainer2" unique_id=250311417]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Score: 0"
+
+[node name="MarginContainer3" type="MarginContainer" parent="HUD/Control" unique_id=1044258635]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.00006
+offset_top = -1.0000001
+offset_right = 49.99994
+offset_bottom = 49.0
+grow_horizontal = 2
+scale = Vector2(2.88, 2.88)
+
+[node name="PlayerHealth" type="Label" parent="HUD/Control/MarginContainer3" unique_id=1474947753]
+layout_mode = 2
+text = "Health: 3"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=318663817]
+custom_minimum_size = Vector2(1, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=216199276]
+custom_minimum_size = Vector2(1920, 1080)
+offset_left = -1.0
+offset_right = 1919.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
 [node name="PlayerShip" parent="." unique_id=802837724 instance=ExtResource("1_ig7tw")]
 position = Vector2(202.99997, 268.99997)
 
@@ -16,13 +89,5 @@ position = Vector2(202.99997, 268.99997)
 wait_time = 30.0
 autostart = true
 
-[node name="HUD" type="Node" parent="." unique_id=65225613]
-
-[node name="PlayerScore" type="Label" parent="HUD" unique_id=250311417]
-offset_left = 28.0
-offset_top = 13.0
-offset_right = 76.0
-offset_bottom = 36.0
-text = "Score: 0"
-
+[connection signal="player_hit" from="PlayerShip" to="." method="_on_player_ship_player_hit"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
