@@ -82,7 +82,8 @@ func _on_score_0B(hit_asteroid):
 	
 func _on_asteroid_timer_timeout() -> void:
 	spawn_asteroid(2)
-
+	spawn_ufo()
+	
 func _on_player_ship_player_hit() -> void:
 	player_health -= 1 
 	$HUD/Control/MarginContainer3/PlayerHealth.text = "Health: " + str(player_health)

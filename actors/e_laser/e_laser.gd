@@ -35,19 +35,19 @@ func _physics_process(delta: float) -> void:
 	await get_tree().create_timer(1.2).timeout
 	#Take particles out of the current node tree
 	await get_tree().process_frame
-	$CPUParticles2D/ExpiryCountdown.start()
 	remove_child(particles)
 	get_tree().get_root().add_child(particles)
+	particles.one_shot = true
 	particles.emitting = true
 	queue_free()
 	
 func _on_area_entered(area: Area2D) -> void:
 	#Wait a tick
+	await get_tree().create_timer(.1).timeout
 	await get_tree().process_frame
-	await get_tree().process_frame
-	$CPUParticles2D/ExpiryCountdown.start()
 	remove_child(particles)
 	get_tree().get_root().add_child(particles)
+	particles.one_shot = true
 	particles.emitting = true
 	queue_free()
 	

@@ -38,4 +38,5 @@ wait_time = 3.0
 one_shot = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="finished" from="CPUParticles2D" to="CPUParticles2D" method="_on_finished"]
 [connection signal="timeout" from="CPUParticles2D/ExpiryCountdown" to="CPUParticles2D" method="_on_expiry_countdown_timeout"]
