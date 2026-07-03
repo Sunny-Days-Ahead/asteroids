@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://di4qwc2bdshaw"]
 
-[ext_resource type="Script" uid="uid://cflrad77f8ab8" path="res://big_asteroid.gd" id="1_g6hak"]
-[ext_resource type="PackedScene" uid="uid://dpyccb5hlri6e" path="res://small_asteroid.tscn" id="2_77n77"]
+[ext_resource type="Script" uid="uid://cflrad77f8ab8" path="res://actors/big_asteroid/big_asteroid.gd" id="1_g6hak"]
+[ext_resource type="PackedScene" uid="uid://dpyccb5hlri6e" path="res://actors/small_asteroid/small_asteroid.tscn" id="2_77n77"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
 radius = 17.029387

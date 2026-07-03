@@ -5,7 +5,6 @@ var speed = 400
 var velocity = 0.0
 var ship_velocity : Vector2 = Vector2.ZERO
 
-signal laser_hit
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Velocity is in the "forward" direction -- bullet is facing right in the scene view, so take the right direction and rotate it the same as the node's rotation
@@ -27,11 +26,5 @@ func _physics_process(delta: float) -> void:
 	await get_tree().create_timer(.85).timeout
 	queue_free()
 
-
-
-func _on_body_entered(body: Node2D) -> void:
-	laser_hit.emit(self)
-	print("test")
-
-func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+func _on_area_entered(area: Area2D) -> void:
 	queue_free()

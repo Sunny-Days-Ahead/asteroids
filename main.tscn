@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://btl0otxtx6dxq"]
 
-[ext_resource type="PackedScene" uid="uid://cwive73pkfkja" path="res://player_ship.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cwive73pkfkja" path="res://actors/player/player_ship.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bgwwbms7eommy" path="res://main.gd" id="1_lquwl"]
 
 [node name="main" type="Node2D" unique_id=941547634 node_paths=PackedStringArray("asteroid_container")]

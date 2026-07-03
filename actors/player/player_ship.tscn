@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://cwive73pkfkja"]
 
-[ext_resource type="Script" uid="uid://cmx837eep4cd7" path="res://player_ship.gd" id="1_q2qul"]
-[ext_resource type="PackedScene" uid="uid://bsoxke8p2ao05" path="res://laser.tscn" id="2_gbmm3"]
+[ext_resource type="Script" uid="uid://cmx837eep4cd7" path="res://actors/player/player_ship.gd" id="1_q2qul"]
+[ext_resource type="PackedScene" uid="uid://bsoxke8p2ao05" path="res://actors/laser/laser.tscn" id="2_gbmm3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf21c"]
+size = Vector2(5.661806, 7.636855)
 
 [node name="PlayerShip" type="CharacterBody2D" unique_id=802837724]
 position = Vector2(7.6293945e-06, -1.9073486e-06)
@@ -24,3 +27,12 @@ polygon = PackedVector2Array(-1.1920929e-07, -4.7683716e-07, 5.0034537, 3.555085
 position = Vector2(4.0817637, 2.5114028e-07)
 
 [node name="BulletContainer" type="Node" parent="." unique_id=831178459]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1297381854]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1019311804]
+position = Vector2(0.72418255, 1.9620333e-07)
+scale = Vector2(0.9999993, 0.9999993)
+shape = SubResource("RectangleShape2D_yf21c")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

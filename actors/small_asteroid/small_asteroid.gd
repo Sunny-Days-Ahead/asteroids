@@ -30,8 +30,9 @@ func _process(delta: float) -> void:
 	position += heading * speed * delta
 	position.x = wrapf(position.x, 0, screen_size.x)
 	position.y = wrapf(position.y, 0, screen_size.y)
-
-
+	move_and_slide()
+	
+	
 @warning_ignore("unused_parameter")
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	score_50.emit(self) ##Return the name of the node with the signal
