@@ -27,6 +27,9 @@ func get_input():
 		velocity += direction * ACCELERATION
 		if velocity.length() > max_speed:
 			velocity = velocity.normalized() * max_speed
+		$thruster.emitting = true
+	else:
+		$thruster.emitting = false
 	##slow down and approach zero when down is pressed
 	if Input.is_action_pressed("down"):
 		velocity.x = move_toward(velocity.x, 0, 10)

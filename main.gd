@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 		var explosion_instance = explosion.instantiate()
 		asteroid_container.add_child(explosion_instance)
 		explosion_instance.global_position = $PlayerShip.global_position
-		await get_tree().process_frame
+		await get_tree().process_frame 
 		player_lives -= 1 
 		$HUD/Control/MarginContainer/PlayerLives.text = "Lives: " + str(player_lives)
 		player_health = 3

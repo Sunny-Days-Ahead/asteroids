@@ -16,8 +16,8 @@ spread = 180.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 316.02
 initial_velocity_max = 316.02
+scale_amount_min = 1.5
+scale_amount_max = 1.5
 script = ExtResource("1_q7epf")
-
-[node name="Timer" type="Timer" parent="." unique_id=1691589743]
 
 [connection signal="finished" from="." to="." method="_on_finished"]
