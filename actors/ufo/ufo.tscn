@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://ig108kewbyrl"]
+
+[ext_resource type="Script" uid="uid://bll48crm7ww64" path="res://actors/ufo/ufo.gd" id="1_n1osf"]
+
+[node name="ufo" type="CharacterBody2D" unique_id=717275498]
+script = ExtResource("1_n1osf")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=2082919153]
+points = PackedVector2Array(0, -24, 40, -24, 72, 0, 40, 24, 0, 24, -40, 24, -71, 0, -40, -24, 0, -24)
+width = 2.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1609136006]
+polygon = PackedVector2Array(-39, -24, 40, -24, 72, 0, 40, 24, -40, 24, -71, 0)
+
+[node name="ELaserContainer" type="Node" parent="." unique_id=1691862782]
+
+[node name="ELaserSpawn" type="Marker2D" parent="." unique_id=851229819]
+
+[node name="Timer" type="Timer" parent="." unique_id=1699182436]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

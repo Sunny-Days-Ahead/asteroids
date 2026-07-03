@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://chh44ag52abyq"]
 
-[ext_resource type="Script" uid="uid://cto85sqqwfco3" path="res://explosion.gd" id="1_q7epf"]
+[ext_resource type="Script" uid="uid://cto85sqqwfco3" path="res://actors/explosion/explosion.gd" id="1_wqjt4"]
 
 [node name="explosion" type="CPUParticles2D" unique_id=414958821]
 emitting = false
@@ -18,6 +18,6 @@ initial_velocity_min = 316.02
 initial_velocity_max = 316.02
 scale_amount_min = 1.5
 scale_amount_max = 1.5
-script = ExtResource("1_q7epf")
+script = ExtResource("1_wqjt4")
 
 [connection signal="finished" from="." to="." method="_on_finished"]

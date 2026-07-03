@@ -3,7 +3,7 @@ extends Node2D
 var player_score
 var big_asteroid = preload("res://actors/big_asteroid/big_asteroid.tscn")
 var small_asteroid = preload("res://actors/small_asteroid/small_asteroid.tscn")
-var explosion = preload("res:///explosion.tscn")
+var explosion = preload("res:///actors/explosion/explosion.tscn")
 
 @export var asteroid_container : Node
 
