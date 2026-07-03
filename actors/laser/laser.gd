@@ -22,6 +22,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Every frame, adjust the position based on velocity and delta
 	position += velocity * delta
+	#This block of code is a smooth offscreen world wrap
 	if position.x > 2020:
 		position.x = -100
 	if position.y > 1180:
@@ -30,19 +31,21 @@ func _physics_process(delta: float) -> void:
 		position.x = 2020
 	if position.y < -100:
 		position.y = 1180
+	#Time before laser expires
 	await get_tree().create_timer(1.2).timeout
 	#Take particles out of the current node tree
 	$CPUParticles2D/ExpiryCountdown.start()
 	remove_child(particles)
 	get_tree().get_root().add_child(particles)
-	#Trigger the one-shot emission so they naturally decay
 	particles.emitting = true
 	queue_free()
+@warning_ignore("unused_parameter")
 func _on_area_entered(area: Area2D) -> void:
+	#Wait a tick
+	await get_tree().process_frame
 	$CPUParticles2D/ExpiryCountdown.start()
 	remove_child(particles)
 	get_tree().get_root().add_child(particles)
-	#Trigger the one-shot emission so they naturally decay
 	particles.emitting = true
 	queue_free()
 	

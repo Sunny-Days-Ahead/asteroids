@@ -2,19 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://cwive73pkfkja" path="res://actors/player/player_ship.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bgwwbms7eommy" path="res://main.gd" id="1_lquwl"]
-[ext_resource type="PackedScene" uid="uid://chh44ag52abyq" path="res://explosion.tscn" id="2_h2yge"]
 
 [sub_resource type="Environment" id="Environment_yf21c"]
 background_mode = 3
 glow_enabled = true
 glow_intensity = 1.7
-glow_strength = 1.05
+glow_strength = 0.49
 glow_bloom = 0.12
 
 [node name="main" type="Node2D" unique_id=941547634 node_paths=PackedStringArray("asteroid_container")]
 script = ExtResource("1_lquwl")
 asteroid_container = NodePath("AsteroidContainer")
-explosion = ExtResource("2_h2yge")
 
 [node name="HUD" type="Node" parent="." unique_id=65225613]
 

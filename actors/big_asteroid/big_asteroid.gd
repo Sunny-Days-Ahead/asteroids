@@ -6,7 +6,6 @@ var angle : float
 var heading : Vector2
 var screen_size : Vector2
 
-@onready var explosion = $Explosion
 @export var small_asteroid : PackedScene
 
 signal score_100

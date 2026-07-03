@@ -32,8 +32,8 @@ func get_input():
 		$thruster.emitting = false
 	##slow down and approach zero when down is pressed
 	if Input.is_action_pressed("down"):
-		velocity.x = move_toward(velocity.x, 0, 10)
-		velocity.y = move_toward(velocity.y, 0, 10)
+		velocity.x = move_toward(velocity.x, 0, 5)
+		velocity.y = move_toward(velocity.y, 0, 5)
 	##it is friday in california
 	if Input.is_action_just_pressed("shoot"):
 		var new_laser := laser.instantiate()
