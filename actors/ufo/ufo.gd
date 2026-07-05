@@ -34,5 +34,3 @@ func _on_timer_timeout() -> void:
 
 func _on_area_2d_area_entered(_area: Area2D) -> void:
 	score_500.emit(self)
-	await get_tree().create_timer(1).timeout
-	queue_free()
