@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://ig108kewbyrl"]
 
 [ext_resource type="Script" uid="uid://bll48crm7ww64" path="res://actors/ufo/ufo.gd" id="1_n1osf"]
+[ext_resource type="AudioStream" uid="uid://be4cp883cuv1h" path="res://sounds/laserShoot.wav" id="2_i50d2"]
 
 [node name="ufo" type="CharacterBody2D" unique_id=717275498]
-collision_layer = 256
-collision_mask = 2
+collision_layer = 257
+collision_mask = 6
 script = ExtResource("1_n1osf")
 
 [node name="Line2D" type="Line2D" parent="." unique_id=2082919153]
@@ -12,7 +13,9 @@ points = PackedVector2Array(0, -24, 40, -24, 72, 0, 40, 24, 0, 24, -40, 24, -71,
 width = 2.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1609136006]
+visible = false
 polygon = PackedVector2Array(-39, -24, 40, -24, 72, 0, 40, 24, -40, 24, -71, 0)
+one_way_collision = true
 
 [node name="ELaserContainer" type="Node" parent="." unique_id=1691862782]
 
@@ -30,6 +33,9 @@ collision_mask = 2
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D" unique_id=2050153139]
 polygon = PackedVector2Array(-39, -24, 40, -24, 72, 0, 40, 24, -40, 24, -71, 0)
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=142964610]
+stream = ExtResource("2_i50d2")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

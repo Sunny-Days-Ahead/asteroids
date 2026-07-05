@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cmx837eep4cd7" path="res://actors/player/player_ship.gd" id="1_q2qul"]
 [ext_resource type="PackedScene" uid="uid://bsoxke8p2ao05" path="res://actors/laser/laser.tscn" id="2_gbmm3"]
+[ext_resource type="AudioStream" uid="uid://c1ou4l675xeen" path="res://sounds/laserShoot-2.wav" id="3_kwp66"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yf21c"]
 size = Vector2(5.661806, 7.636855)
@@ -15,6 +16,7 @@ script = ExtResource("1_q2qul")
 laser = ExtResource("2_gbmm3")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1106505721]
+oversampling_with_scale = 1
 position = Vector2(-0.52668023, 2.511403e-07)
 scale = Vector2(0.57891786, 0.56553453)
 polygon = PackedVector2Array(6.583491, 2.5114028e-07, -2.1067183, -6.188482, 1.5920889, 0, -2.0469723, 6.28624)
@@ -47,5 +49,8 @@ initial_velocity_min = 10.0
 initial_velocity_max = 10.0
 scale_amount_min = 3.0
 scale_amount_max = 3.0
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=1614386812]
+stream = ExtResource("3_kwp66")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

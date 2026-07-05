@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://cwive73pkfkja" path="res://actors/player/player_ship.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bgwwbms7eommy" path="res://main.gd" id="1_lquwl"]
+[ext_resource type="AudioStream" uid="uid://djvq6jtdjfmf5" path="res://sounds/explosion-2.wav" id="3_1bvp3"]
+[ext_resource type="AudioStream" uid="uid://cjg1qebnqrarv" path="res://sounds/explosion.wav" id="4_lquwl"]
 
 [sub_resource type="Environment" id="Environment_yf21c"]
 background_mode = 3
@@ -90,6 +92,14 @@ position = Vector2(956.9999, 530)
 [node name="AsteroidTimer" type="Timer" parent="." unique_id=849074482]
 wait_time = 15.0
 autostart = true
+
+[node name="AudioController" type="Node" parent="." unique_id=1810465468]
+
+[node name="Explosion1" type="AudioStreamPlayer2D" parent="AudioController" unique_id=1096433663]
+stream = ExtResource("3_1bvp3")
+
+[node name="Explosion2" type="AudioStreamPlayer2D" parent="AudioController" unique_id=659822378]
+stream = ExtResource("4_lquwl")
 
 [connection signal="player_hit" from="PlayerShip" to="." method="_on_player_ship_player_hit"]
 [connection signal="player_shot" from="PlayerShip" to="." method="_on_player_ship_player_shot"]

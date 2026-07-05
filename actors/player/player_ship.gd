@@ -37,6 +37,7 @@ func get_input():
 		velocity.y = move_toward(velocity.y, 0, 5)
 	##it is friday in california
 	if Input.is_action_just_pressed("shoot"):
+		$ShootSound.play()
 		var new_laser := laser.instantiate()
 		new_laser.global_rotation = self.rotation
 		new_laser.global_position = $Marker2D.global_position

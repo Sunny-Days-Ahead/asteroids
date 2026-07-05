@@ -25,6 +25,7 @@ func _process(delta: float) -> void:
 		var length = get_viewport().size.y
 		var width = get_viewport().size.x
 		var explosion_instance = explosion.instantiate()
+		$AudioController/Explosion2.play()
 		asteroid_container.add_child(explosion_instance)
 		explosion_instance.global_position = $PlayerShip.global_position
 		await get_tree().process_frame 
@@ -38,6 +39,7 @@ func _process(delta: float) -> void:
 
 func _on_score_500(hit_ufo):
 	player_score += 500
+	$AudioController/Explosion2.play()
 	var explosioin_instance = explosion.instantiate()
 	asteroid_container.add_child(explosioin_instance)
 	explosioin_instance.global_position = hit_ufo.global_position
@@ -46,6 +48,7 @@ func _on_score_500(hit_ufo):
 	
 func _on_score_100(hit_asteroid) -> void:
 	player_score += 100
+	$AudioController/Explosion1.play()
 	var explosion_instance = explosion.instantiate()
 	asteroid_container.add_child(explosion_instance)
 	explosion_instance.global_position = hit_asteroid.global_position
@@ -57,6 +60,7 @@ func _on_score_100(hit_asteroid) -> void:
 	
 func _on_score_50(hit_asteroid) -> void:
 	player_score += 50
+	$AudioController/Explosion1.play()
 	var explosion_instance = explosion.instantiate()
 	asteroid_container.add_child(explosion_instance)
 	explosion_instance.global_position = hit_asteroid.global_position
@@ -64,6 +68,7 @@ func _on_score_50(hit_asteroid) -> void:
 	hit_asteroid.queue_free()
 	
 func _on_score_0A(hit_asteroid) -> void:
+	$AudioController/Explosion1.play()
 	var explosion_instance = explosion.instantiate()
 	asteroid_container.add_child(explosion_instance)
 	explosion_instance.global_position = hit_asteroid.global_position
@@ -74,6 +79,7 @@ func _on_score_0A(hit_asteroid) -> void:
 	hit_asteroid.queue_free()
 	
 func _on_score_0B(hit_asteroid):
+	$AudioController/Explosion1.play()
 	var explosion_instance = explosion.instantiate()
 	asteroid_container.add_child(explosion_instance)
 	explosion_instance.global_position = hit_asteroid.global_position
