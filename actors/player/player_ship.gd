@@ -62,5 +62,11 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	print(area.collision_layer)
 	if area.get_collision_layer_value(1):
 		player_hit.emit()
+		hit_flash()
 	else:
 		player_shot.emit()
+
+func hit_flash():
+	$Polygon2D.self_modulate = Color(255, 0, 0)
+	await get_tree().create_timer(.15).timeout
+	$Polygon2D.self_modulate = Color(255, 255, 255)

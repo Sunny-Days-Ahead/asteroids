@@ -6,6 +6,7 @@
 [node name="ufo" type="CharacterBody2D" unique_id=717275498]
 collision_layer = 257
 collision_mask = 6
+motion_mode = 1
 script = ExtResource("1_n1osf")
 
 [node name="Line2D" type="Line2D" parent="." unique_id=2082919153]
@@ -15,7 +16,6 @@ width = 2.0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1609136006]
 visible = false
 polygon = PackedVector2Array(-39, -24, 40, -24, 72, 0, 40, 24, -40, 24, -71, 0)
-one_way_collision = true
 
 [node name="ELaserContainer" type="Node" parent="." unique_id=1691862782]
 
