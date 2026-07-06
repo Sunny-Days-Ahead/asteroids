@@ -14,6 +14,21 @@ font_size = 30
 [sub_resource type="LabelSettings" id="LabelSettings_7mycd"]
 font_size = 30
 
+[sub_resource type="LabelSettings" id="LabelSettings_5vw27"]
+font_size = 30
+
+[sub_resource type="SystemFont" id="SystemFont_lquwl"]
+
+[sub_resource type="Theme" id="Theme_1bvp3"]
+default_font = SubResource("SystemFont_lquwl")
+default_font_size = 30
+
+[sub_resource type="Theme" id="Theme_7mycd"]
+default_font_size = 30
+
+[sub_resource type="Theme" id="Theme_272bh"]
+default_font_size = 30
+
 [sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
 font_size = 72
 
@@ -26,48 +41,13 @@ glow_bloom = 0.16
 glow_blend_mode = 2
 
 [node name="main" type="Node2D" unique_id=941547634 node_paths=PackedStringArray("asteroid_container")]
+process_mode = 3
 script = ExtResource("1_lquwl")
 asteroid_container = NodePath("AsteroidContainer")
 player_lives = 1
 
 [node name="HUD" type="Node" parent="." unique_id=65225613]
-
-[node name="Pause Menu" type="Control" parent="HUD" unique_id=1101074922]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="HUD/Pause Menu" unique_id=2034692980]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Pause Menu/MarginContainer" unique_id=371152498]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="HUD/Pause Menu/MarginContainer/VBoxContainer" unique_id=2117663904]
-process_mode = 2
-layout_mode = 2
-text = "Paused"
-horizontal_alignment = 1
-
-[node name="Unpause" type="Button" parent="HUD/Pause Menu/MarginContainer/VBoxContainer" unique_id=1723672733]
-layout_mode = 2
-text = "Unpause"
-
-[node name="Restart" type="Button" parent="HUD/Pause Menu/MarginContainer/VBoxContainer" unique_id=1963161930]
-layout_mode = 2
-text = "Restart"
-
-[node name="Quit" type="Button" parent="HUD/Pause Menu/MarginContainer/VBoxContainer" unique_id=1995051085]
-layout_mode = 2
-text = "Quit
-"
+process_mode = 3
 
 [node name="Control" type="Control" parent="HUD" unique_id=1521026973]
 layout_mode = 3
@@ -125,7 +105,56 @@ layout_mode = 2
 text = "Health: 3"
 label_settings = SubResource("LabelSettings_7mycd")
 
+[node name="Pause Menu" type="Control" parent="HUD" unique_id=1101074922]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/Pause Menu" unique_id=2034692980]
+process_mode = 3
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Pause Menu/MarginContainer" unique_id=371152498]
+process_mode = 3
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/Pause Menu/MarginContainer/VBoxContainer" unique_id=2117663904]
+process_mode = 3
+layout_mode = 2
+text = "Paused"
+label_settings = SubResource("LabelSettings_5vw27")
+horizontal_alignment = 1
+
+[node name="Unpause" type="Button" parent="HUD/Pause Menu/MarginContainer/VBoxContainer" unique_id=1723672733]
+process_mode = 3
+layout_mode = 2
+theme = SubResource("Theme_1bvp3")
+button_mask = 7
+text = "Unpause"
+
+[node name="Restart" type="Button" parent="HUD/Pause Menu/MarginContainer/VBoxContainer" unique_id=1963161930]
+process_mode = 3
+layout_mode = 2
+theme = SubResource("Theme_7mycd")
+text = "Restart"
+
+[node name="Quit" type="Button" parent="HUD/Pause Menu/MarginContainer/VBoxContainer" unique_id=1995051085]
+process_mode = 3
+layout_mode = 2
+theme = SubResource("Theme_272bh")
+text = "Quit
+"
+
 [node name="GameOver" type="Control" parent="HUD" unique_id=1021600233]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -151,32 +180,42 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="GameOverText" type="Label" parent="HUD/GameOver/MarginContainer/VBoxContainer" unique_id=1638028873]
-process_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
-text = "GAMEOVER"
+text = "GAME OVER"
 label_settings = SubResource("LabelSettings_g4v7s")
+
+[node name="Restart" type="Button" parent="HUD/GameOver/MarginContainer/VBoxContainer" unique_id=67006009]
+process_mode = 3
+layout_mode = 2
+theme = SubResource("Theme_7mycd")
+text = "Restart"
 
 [node name="Background" type="ColorRect" parent="." unique_id=216199276]
 custom_minimum_size = Vector2(1920, 1080)
 offset_left = -2.0
 offset_right = 1918.0
 offset_bottom = 1080.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Background" unique_id=1356209322]
 environment = SubResource("Environment_yf21c")
 
 [node name="PlayerShip" parent="." unique_id=802837724 instance=ExtResource("1_ig7tw")]
+process_mode = 1
 position = Vector2(956.9999, 530)
 
 [node name="AsteroidContainer" type="Node" parent="." unique_id=537410721]
+process_mode = 1
 
 [node name="AsteroidTimer" type="Timer" parent="." unique_id=849074482]
+process_mode = 1
 wait_time = 15.0
 autostart = true
 
 [node name="AudioController" type="Node" parent="." unique_id=1810465468]
+process_mode = 1
 
 [node name="Explosion1" type="AudioStreamPlayer2D" parent="AudioController" unique_id=1096433663]
 stream = ExtResource("3_1bvp3")
@@ -185,7 +224,9 @@ stream = ExtResource("3_1bvp3")
 stream = ExtResource("4_lquwl")
 
 [connection signal="pressed" from="HUD/Pause Menu/MarginContainer/VBoxContainer/Unpause" to="." method="_on_unpause_pressed"]
+[connection signal="pressed" from="HUD/Pause Menu/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="HUD/Pause Menu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="HUD/GameOver/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="player_hit" from="PlayerShip" to="." method="_on_player_ship_player_hit"]
 [connection signal="player_shot" from="PlayerShip" to="." method="_on_player_ship_player_shot"]
 [connection signal="timeout" from="AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]
