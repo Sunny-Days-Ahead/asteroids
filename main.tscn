@@ -5,6 +5,18 @@
 [ext_resource type="AudioStream" uid="uid://djvq6jtdjfmf5" path="res://sounds/explosion-2.wav" id="3_1bvp3"]
 [ext_resource type="AudioStream" uid="uid://cjg1qebnqrarv" path="res://sounds/explosion.wav" id="4_lquwl"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_1bvp3"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_lquwl"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_7mycd"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
+font_size = 72
+
 [sub_resource type="Environment" id="Environment_yf21c"]
 background_mode = 3
 glow_enabled = true
@@ -16,8 +28,46 @@ glow_blend_mode = 2
 [node name="main" type="Node2D" unique_id=941547634 node_paths=PackedStringArray("asteroid_container")]
 script = ExtResource("1_lquwl")
 asteroid_container = NodePath("AsteroidContainer")
+player_lives = 1
 
 [node name="HUD" type="Node" parent="." unique_id=65225613]
+
+[node name="Pause Menu" type="Control" parent="HUD" unique_id=1101074922]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/Pause Menu" unique_id=2034692980]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Pause Menu/MarginContainer" unique_id=371152498]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/Pause Menu/MarginContainer/VBoxContainer" unique_id=2117663904]
+process_mode = 2
+layout_mode = 2
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Unpause" type="Button" parent="HUD/Pause Menu/MarginContainer/VBoxContainer" unique_id=1723672733]
+layout_mode = 2
+text = "Unpause"
+
+[node name="Restart" type="Button" parent="HUD/Pause Menu/MarginContainer/VBoxContainer" unique_id=1963161930]
+layout_mode = 2
+text = "Restart"
+
+[node name="Quit" type="Button" parent="HUD/Pause Menu/MarginContainer/VBoxContainer" unique_id=1995051085]
+layout_mode = 2
+text = "Quit
+"
 
 [node name="Control" type="Control" parent="HUD" unique_id=1521026973]
 layout_mode = 3
@@ -38,28 +88,28 @@ offset_bottom = 23.0
 grow_horizontal = 0
 offset_transform_enabled = true
 offset_transform_position = Vector2(-100, 50)
-offset_transform_scale = Vector2(2.88, 2.88)
 
 [node name="PlayerLives" type="Label" parent="HUD/Control/MarginContainer" unique_id=1904675976]
 layout_mode = 2
 text = "Lives: 3"
+label_settings = SubResource("LabelSettings_1bvp3")
 
 [node name="MarginContainer2" type="MarginContainer" parent="HUD/Control" unique_id=1709155821]
 layout_mode = 1
 offset_right = 61.0
 offset_bottom = 23.0
 offset_transform_enabled = true
-offset_transform_position = Vector2(100, 50)
-offset_transform_scale = Vector2(2.88, 2.88)
+offset_transform_position = Vector2(100, 35)
 metadata/_edit_use_anchors_ = true
 
 [node name="PlayerScore" type="Label" parent="HUD/Control/MarginContainer2" unique_id=250311417]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Score: 0"
+label_settings = SubResource("LabelSettings_lquwl")
 
 [node name="MarginContainer3" type="MarginContainer" parent="HUD/Control" unique_id=1044258635]
-custom_minimum_size = Vector2(100, 50)
+custom_minimum_size = Vector2(0, 125)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -69,11 +119,43 @@ offset_top = -1.0000001
 offset_right = 49.99994
 offset_bottom = 49.0
 grow_horizontal = 2
-scale = Vector2(2.88, 2.88)
 
 [node name="PlayerHealth" type="Label" parent="HUD/Control/MarginContainer3" unique_id=1474947753]
 layout_mode = 2
 text = "Health: 3"
+label_settings = SubResource("LabelSettings_7mycd")
+
+[node name="GameOver" type="Control" parent="HUD" unique_id=1021600233]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/GameOver" unique_id=1065819639]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -197.0
+offset_top = -67.0
+offset_right = 197.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/GameOver/MarginContainer" unique_id=1385069400]
+layout_mode = 2
+
+[node name="GameOverText" type="Label" parent="HUD/GameOver/MarginContainer/VBoxContainer" unique_id=1638028873]
+process_mode = 2
+layout_mode = 2
+size_flags_horizontal = 4
+text = "GAMEOVER"
+label_settings = SubResource("LabelSettings_g4v7s")
 
 [node name="Background" type="ColorRect" parent="." unique_id=216199276]
 custom_minimum_size = Vector2(1920, 1080)
@@ -102,6 +184,8 @@ stream = ExtResource("3_1bvp3")
 [node name="Explosion2" type="AudioStreamPlayer2D" parent="AudioController" unique_id=659822378]
 stream = ExtResource("4_lquwl")
 
+[connection signal="pressed" from="HUD/Pause Menu/MarginContainer/VBoxContainer/Unpause" to="." method="_on_unpause_pressed"]
+[connection signal="pressed" from="HUD/Pause Menu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="player_hit" from="PlayerShip" to="." method="_on_player_ship_player_hit"]
 [connection signal="player_shot" from="PlayerShip" to="." method="_on_player_ship_player_shot"]
 [connection signal="timeout" from="AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]

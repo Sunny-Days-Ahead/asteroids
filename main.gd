@@ -14,6 +14,10 @@ var ufo = preload("res://actors/ufo/ufo.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player_score = 0
+	#player_health = 3
+	#player_lives = 3
+	$"HUD/Pause Menu".hide()
+	$HUD/GameOver.hide()
 	spawn_asteroid(4)
 	spawn_ufo()
 	spawn_no_of_small_asteroids(8)
@@ -21,6 +25,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("pause"):
+		$"HUD/Pause Menu".show()
+		$"HUD/Pause Menu".grab_focus()
+		get_tree().paused = true
 	if player_health <= 0 : 
 		var length = get_viewport().size.y
 		var width = get_viewport().size.x
@@ -35,7 +43,8 @@ func _process(delta: float) -> void:
 		$HUD/Control/MarginContainer3/PlayerHealth.text = "Health: " + str(player_health)
 		$PlayerShip.global_position = Vector2(width/2, length/2)
 	if player_lives == 0: 
-		get_tree().quit()
+		$PlayerShip.hide()
+		$HUD/GameOver.show()
 
 func _on_score_500(hit_ufo):
 	player_score += 500
@@ -121,3 +130,12 @@ func spawn_ufo():
 	var ufo_instance = ufo.instantiate()
 	asteroid_container.add_child(ufo_instance)
 	ufo_instance.score_500.connect(_on_score_500)
+
+
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()
+
+
+func _on_unpause_pressed() -> void:
+	get_tree().paused == false 

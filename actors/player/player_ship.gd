@@ -52,12 +52,11 @@ func _physics_process(delta):
 	rotation += rotation_direction * rotation_speed * delta
 	move_and_slide()
 
-@warning_ignore("unused_parameter")
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	position.x = wrapf(position.x, 0, screen_size.x)
 	position.y = wrapf(position.y, 0, screen_size.y)
 
-@warning_ignore("unused_parameter")
+
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	print(area.collision_layer)
 	if area.get_collision_layer_value(1):
